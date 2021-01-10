@@ -1,0 +1,42 @@
+service: digiorgio-api
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: sa-east-1
+  timeout: 10
+  environment:
+    ANALYTICS_BUCKET_NAME: 'digiorgio-analytics'
+    ANALYTICS_FILE_NAME_PREFIX: 'access.log'
+  iamRoleStatements: # IAM role statements so that services can be accessed in the AWS account
+    - Effect: 'Allow'
+      Action:
+        - 's3:*'
+      Resource: '*'
+
+functions:
+  analytics:
+    description: Stores analytics data.
+    handler: analytics.save
+    events:
+      - http:
+          path: /api/analytics
+          method: post
+
+resources:
+  Resources:
+    DigitalActivationCredentials:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: 'digiorgio-analytics'
+
+    SecurityGroup:
+      Type: 'AWS::EC2::SecurityGroup'
+      Properties:
+        GroupName: 'digiorgio-sg'
+        GroupDescription: 'Di Giorgio security group'
+        SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: '80'
+            ToPort: '80'
+            CidrIp: 0.0.0.0/0
