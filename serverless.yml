@@ -7,7 +7,7 @@ provider:
   timeout: 10
   environment:
     ANALYTICS_BUCKET_NAME: 'digiorgio-analytics'
-    ANALYTICS_FILE_NAME_PREFIX: 'access.log'
+    ANALYTICS_FILE_NAME_PREFIX: 'access'
   iamRoleStatements: # IAM role statements so that services can be accessed in the AWS account
     - Effect: 'Allow'
       Action:
@@ -22,10 +22,11 @@ functions:
       - http:
           path: /api/analytics
           method: post
+          cors: true
 
 resources:
   Resources:
-    DigitalActivationCredentials:
+    DiGiorgioAnalyticsBucket:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: 'digiorgio-analytics'
