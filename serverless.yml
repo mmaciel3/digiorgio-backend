@@ -9,17 +9,13 @@ provider:
     ANALYTICS_BUCKET_NAME: 'digiorgio-analytics'
     ANALYTICS_FILE_NAME_PREFIX: 'access'
     LEAD_EMAIL_RECIPIENT: 'natadigiorgio@gmail.com'
-    LEAD_EMAIL_SENDER: 'marcas@digiorgio.adv.br'
-    LEAD_EMAIL_SUBJECT: 'Novo interessado em registro de marca'
-  iamRoleStatements: # IAM role statements so that services can be accessed in the AWS account
+    LEAD_EMAIL_SENDER: 'Digio Marcas <marcas@digiorgio.adv.br>'
+    LEAD_EMAIL_TEMPLATE_NAME: 'BrandLead'
+  iamRoleStatements:
     - Effect: 'Allow'
       Action:
         - 's3:*'
-      Resource: '*'
-    - Effect: 'Allow'
-      Action:
-        - 'ses:SendEmail'
-        - 'ses:SendRawEmail'
+        - 'ses:*'
       Resource: '*'
 
 functions:

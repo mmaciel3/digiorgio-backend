@@ -1,0 +1,7 @@
+{
+	"Template": {
+		"TemplateName": "BrandLead",
+		"SubjectPart": "Novo interessado em registro de marca",
+		"HtmlPart": "<h3>Marca</h3>{{brand}}<h3>Tipo</h3>{{type}}<h3>Email</h3>{{email}}<h3>Telefone</h3>{{phone}}<h3>Descrição</h3>{{description}}"
+	}
+}
