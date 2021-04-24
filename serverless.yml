@@ -24,7 +24,7 @@ functions:
     handler: analytics.save
     events:
       - http:
-          path: /api/analytics
+          path: /analytics
           method: post
           cors: true
   leads:
@@ -32,7 +32,7 @@ functions:
     handler: leads.notify
     events:
       - http:
-          path: /api/leads
+          path: /leads
           method: post
           cors: true
 
